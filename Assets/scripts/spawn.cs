@@ -60,8 +60,8 @@ public class spawn : MonoBehaviour
       bossspawnpoints = GameObject.FindGameObjectsWithTag("bossSpawn");
       for (; bosscount < bossspawnpoints.Length; bosscount++)
       {
-         int randindex = Random.Range(0, Bafs.Length);
-         Instantiate(Boss[0], bossspawnpoints[bosscount].transform.position, Quaternion.identity);
+         int randindex = Random.Range(0, Boss.Length);
+         Instantiate(Boss[randindex], bossspawnpoints[bosscount].transform.position, Quaternion.identity);
       }
    }
 }

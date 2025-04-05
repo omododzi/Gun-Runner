@@ -2,35 +2,51 @@ using UnityEngine;
 using UnityEngine.UI;
 public class buttonController : MonoBehaviour
 {
-    public static GameObject button1;
-    public static GameObject button2;
-    public static GameObject button3;
-    public static GameObject button4;
+    // 1. Делаем поля приватными (но сериализуемыми)
+    [SerializeField] private GameObject Buff1;
+    [SerializeField] private GameObject Buff2;
+    [SerializeField] private GameObject Buff3;
+    [SerializeField] private GameObject start;
 
-    void Start()
-    {
-        button1 = GameObject.FindGameObjectWithTag("Baff1");
-        button2 = GameObject.FindGameObjectWithTag("Baff2");
-        button3 = GameObject.FindGameObjectWithTag("Baff3");
-        button4 = GameObject.FindGameObjectWithTag("Start");
-        Button button = GetComponent<Button>();
-        button.onClick.AddListener(OnButtonClick);
-    }
-    void OnButtonClick()
-    {
-        button1.SetActive(false);
-        button2.SetActive(false);
-        button3.SetActive(false);
-        button4.SetActive(false);
-        move.canMove = true;
-    }
-
-    public static void Magazine()
+    // 2. Убираем static у Magazine
+    public void Magazine() 
     {
         move.canMove = false;
-        button1.SetActive(true);
-        button2.SetActive(true);
-        button3.SetActive(true);
-        button4.SetActive(true);
+        Buff1.SetActive(true);
+        Buff2.SetActive(true);
+        Buff3.SetActive(true);
+        start.SetActive(true);
+    }
+
+    // 3. Исправляем OnrestartClick → OnRestartClick
+    public void OnRestartClick() 
+    {
+        move.restarting = true;
+        move.canMove = false;
+    }
+
+    private void Start()
+    {
+        // 4. Ищем объекты, если не заданы в Inspector
+        if (Buff1 == null) Buff1 = GameObject.FindGameObjectWithTag("Baff1");
+        if (Buff2 == null) Buff2 = GameObject.FindGameObjectWithTag("Baff2");
+        if (Buff3 == null) Buff3 = GameObject.FindGameObjectWithTag("Baff3");
+        if (start == null) start = GameObject.FindGameObjectWithTag("Start");
+
+        // 5. Назначаем обработчик кнопки
+        Button button = GetComponent<Button>();
+        if (button != null)
+        {
+            button.onClick.AddListener(OnButtonClick);
+        }
+    }
+
+    public void OnButtonClick()
+    {
+        Buff1.SetActive(false);
+        Buff2.SetActive(false);
+        Buff3.SetActive(false);
+        start.SetActive(false);
+        move.canMove = true;
     }
 }

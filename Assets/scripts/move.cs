@@ -8,16 +8,18 @@ public class move : MonoBehaviour
     private Rigidbody Rb;
     private bool isfighting = false;
     public GameObject restartTxT;
-    public bool restarting = false;
+    public static bool restarting = false;
     private Vector3 startpos;
     public static bool canMove = false;
 
     private spawn _spawn;
+    private buttonController buttonController;
     void Start()
     {
         Rb = GetComponent<Rigidbody>();
         startpos = gameObject.transform.position;
         _spawn = new spawn();
+        buttonController = new buttonController();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -27,8 +29,6 @@ public class move : MonoBehaviour
             restarting = true;
             canMove = false;
         }
-
-        
     }
 
     void Update()
