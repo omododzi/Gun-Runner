@@ -11,6 +11,14 @@ public class boss : MonoBehaviour
     {
       
     }
+    if (other.CompareTag("Player"))
+    {
+      move player = other.GetComponent<move>();
+      if (player != null)
+      {
+        
+      }
+    }
   }
 
   void Dead()

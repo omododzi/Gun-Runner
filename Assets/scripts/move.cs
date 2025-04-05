@@ -10,6 +10,7 @@ public class move : MonoBehaviour
     public GameObject restartTxT;
     public bool restarting = false;
     private Vector3 startpos;
+    public static bool canMove = false;
 
     private spawn _spawn;
     void Start()
@@ -23,27 +24,29 @@ public class move : MonoBehaviour
     {
         if (other.gameObject.CompareTag("trap"))
         {
-            restartTxT.SetActive(true);
             restarting = true;
+            canMove = false;
         }
 
-        if (other.gameObject.CompareTag("Boss"))
-        {
-            _spawn.LoadNextLevel();
-        }
+        
     }
 
     void Update()
     {
-        Move();
+        if (canMove)
+        {
+            Move();
+        }
+        
         if (restarting)
         {
             gameObject.transform.position = startpos;
+            buttonController.Magazine();
             restarting = false;
         }
     }
     
-    private void Move()
+    public void Move()
     {
         _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
         Rb.linearVelocity = new Vector3(-moveSpeed, Rb.linearVelocity.y,_input.x * moveSpeed);

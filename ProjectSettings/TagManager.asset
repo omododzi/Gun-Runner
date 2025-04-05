@@ -9,6 +9,12 @@ TagManager:
   - minus
   - Boss
   - Bullet
+  - Spawntarg
+  - bossSpawn
+  - Start
+  - Baff1
+  - Baff2
+  - Baff3
   layers:
   - Default
   - TransparentFX
