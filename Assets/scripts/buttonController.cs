@@ -21,7 +21,7 @@ public class buttonController : MonoBehaviour
         button1.SetActive(false);
         button2.SetActive(false);
         button3.SetActive(false);
-        gameObject.SetActive(false);
+        button4.SetActive(false);
         move.canMove = true;
     }
 
