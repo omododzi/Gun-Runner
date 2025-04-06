@@ -11,15 +11,15 @@ public class move : MonoBehaviour
     public static bool restarting = false;
     private Vector3 startpos;
     public static bool canMove = false;
-
     private spawn _spawn;
-    private buttonController buttonController;
+    private MAgazine magazine;
+
     void Start()
     {
         Rb = GetComponent<Rigidbody>();
         startpos = gameObject.transform.position;
         _spawn = new spawn();
-        buttonController = new buttonController();
+        magazine = GetComponent<MAgazine>();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -31,18 +31,31 @@ public class move : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Boss"))
+        {
+            canMove = false;
+        }
+    }
+
     void Update()
     {
         if (canMove)
         {
             Move();
         }
+        else
+        {
+            Rb.linearVelocity = Vector3.zero;
+        }
         
         if (restarting)
         {
             gameObject.transform.position = startpos;
-            buttonController.Magazine();
+            magazine.Inmagaz();
             restarting = false;
+            canMove = false;
         }
     }
     
