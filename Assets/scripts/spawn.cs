@@ -9,13 +9,15 @@ public class spawn : MonoBehaviour
 
    public GameObject[] Floor;
    public int spawnedfloor = 1;
-   public int floorsize = 176;
+   private int floorsize = 999;
    
    public GameObject[] Boss;
    public GameObject[] bossspawnpoints;
    public int bosscount = 0;
 
-   
+   public GameObject[] Bonus;
+   public GameObject[] Bonusspawnpoints;
+   public int bonuscount = 0;
 
    void Update()
    {
@@ -25,15 +27,16 @@ public class spawn : MonoBehaviour
       }
       Spawnbafs();
       SpawnBoss();
+      SpawnBonus();
    }
 
    public void Spawnfloor()
    {
       int randindex = Random.Range(0, Floor.Length);
       Vector3 pos = new Vector3(209.6f - floorsize, 0.0121555f, 25.9f);
-      Instantiate(Floor[0], pos, Quaternion.identity);
+      Instantiate(Floor[randindex], pos, Quaternion.identity);
       spawnedfloor++;
-      floorsize += 176;
+      floorsize += 999;
       
    }
 
@@ -62,6 +65,16 @@ public class spawn : MonoBehaviour
       {
          int randindex = Random.Range(0, Boss.Length);
          Instantiate(Boss[randindex], bossspawnpoints[bosscount].transform.position, Quaternion.identity);
+      }
+   }
+
+   void SpawnBonus()
+   {
+      Bonusspawnpoints = GameObject.FindGameObjectsWithTag("BonusSpawn");
+      for (; bonuscount < Bonus.Length; bonuscount++)
+      {
+         int randindex = Random.Range(0, Bonus.Length);
+         Instantiate(Bonus[randindex], Bonusspawnpoints[bonuscount].transform.position, Quaternion.identity);
       }
    }
 }

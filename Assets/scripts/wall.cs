@@ -4,13 +4,20 @@ using TMPro;
 public class wall : MonoBehaviour
 {
     public TMP_Text tmpText;
-    public int hp = 100;
+    public static int wallmaxhp;
+    public int hp = wallmaxhp;
+    private shoot _shoot;
+
+    void Start()
+    {
+        _shoot = new shoot();
+    }
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            hp -= 10;
+            hp -= _shoot.damage;
         }
     }
 

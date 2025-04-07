@@ -2,17 +2,23 @@ using System.Collections;
 using UnityEngine;
 
 public class boss : MonoBehaviour
-{
-  public static int hp = 100;
+{ 
+    public static int maxhpboss;
+  public int hp = maxhpboss;
   private int maney;
   private bool getmoney = false;
   private Animator animator;
-  public static int speed = 5;
+  public  int speed = 5;
   private Rigidbody RB;
   private shoot _shoot;
   private bool fight = false;
+  private Transform player;
   void Start()
   {
+      player = GameObject.FindGameObjectWithTag("Player").transform;
+      maxhpboss += 100;
+      hp = maxhpboss;
+      wall.wallmaxhp += 10;
       maney = hp;
     animator = GetComponent<Animator>();
     RB = GetComponent<Rigidbody>();
@@ -50,7 +56,17 @@ public class boss : MonoBehaviour
   {
       if (fight && hp > 0)
       {
-          RB.linearVelocity = new Vector3(speed, 0, 0);
+          Vector3 direction = (player.position - transform.position).normalized;
+
+// Движение (инвертировано из-за неправильной оси forward)
+          RB.MovePosition(transform.position - direction * speed * Time.deltaTime);
+
+// Поворот
+          transform.rotation = Quaternion.Slerp(
+              transform.rotation, 
+              Quaternion.LookRotation(direction), 
+              10f * Time.deltaTime
+          );
       }
 
       if (hp <= 0)
@@ -58,6 +74,7 @@ public class boss : MonoBehaviour
           animator.SetTrigger("die");
           Destroy(gameObject,0.5f);
           score.summ += maney;
+          maxhpboss += 200;
           hp = 1000;
       }
   }
@@ -65,6 +82,8 @@ public class boss : MonoBehaviour
   IEnumerator Coldown()
   {
       yield return new WaitForSeconds(0.3f);
+      fight = false;
+      animator.SetBool("issleep", true);
       move.restarting = true;
   }
 }

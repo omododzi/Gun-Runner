@@ -12,13 +12,16 @@ public class move : MonoBehaviour
     private Vector3 startpos;
     public static bool canMove = false;
     private spawn _spawn;
+    private shoot _shoot;
     private MAgazine magazine;
 
     void Start()
     {
+        boss.maxhpboss = 100;
         Rb = GetComponent<Rigidbody>();
         startpos = gameObject.transform.position;
         _spawn = new spawn();
+        _shoot = new shoot();
         magazine = GetComponent<MAgazine>();
     }
 
@@ -37,13 +40,42 @@ public class move : MonoBehaviour
         {
             canMove = false;
         }
+        if (other.CompareTag("Coin"))
+        {
+            score.summ += 10;
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Speed"))
+        {
+            moveSpeed += 2;
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Star"))
+        {
+            score.summ += 100;
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("minus"))
+        {
+            _shoot.damage -= 10;
+        }
+        else if (other.CompareTag("plus"))
+        {
+            _shoot.damage += 10;
+            Debug.Log(_shoot.damage);
+        }
     }
 
     void Update()
     {
+       
         if (canMove)
         {
             Move();
+            
         }
         else
         {
@@ -54,8 +86,14 @@ public class move : MonoBehaviour
         {
             gameObject.transform.position = startpos;
             magazine.Inmagaz();
-            restarting = false;
             canMove = false;
+            score.summ = 0;
+            shoot.canshot = false;
+            boss.maxhpboss = 100;
+            moveSpeed = 10f;
+            shoot.CD = 0.5f;
+            _shoot.damage = 10;
+            restarting = false;
         }
     }
     

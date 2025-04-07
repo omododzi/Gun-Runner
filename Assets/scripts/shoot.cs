@@ -7,16 +7,17 @@ public class shoot : MonoBehaviour
     public GameObject bullet; // Префаб пули
     public Transform bulletSpawn; // Точка появления пули
     public int damage = 10; 
-    public bool canshot = true;
+    public static bool canshot = false;
     public static float CD = 0.5f;
 
    
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canshot)
+        if (canshot && !move.restarting)
         {
             Shoot();
+            StartCoroutine(Cooldown());
         }
     }
 
@@ -24,10 +25,6 @@ public class shoot : MonoBehaviour
     {
         // Создаем пулю
         GameObject newBullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
-        StartCoroutine(Cooldown());
-
-
-
         Destroy(newBullet, 1f);
     }
 

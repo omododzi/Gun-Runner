@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +9,17 @@ public class startButton : MonoBehaviour
     public GameObject baff2;
     public GameObject baff3;
 
+    
+
     void Start()
     {
+
         Button button = GetComponent<Button>();
         if (button != null)
             button.onClick.AddListener(OnButtonClick);
     }
+
+   
 
     void OnButtonClick()
     {
@@ -22,5 +28,6 @@ public class startButton : MonoBehaviour
         baff2.SetActive(false);
         baff3.SetActive(false);
         move.canMove = true;
+        shoot.canshot = true;
     }
 }

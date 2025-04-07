@@ -17,6 +17,10 @@ TagManager:
   - Baff3
   - hpoffwall
   - bulletSpawn
+  - BonusSpawn
+  - Coin
+  - Speed
+  - Star
   layers:
   - Default
   - TransparentFX
