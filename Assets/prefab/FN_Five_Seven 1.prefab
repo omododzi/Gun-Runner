@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 5722369821424495458}
   - component: {fileID: 9146989486616362201}
   m_Layer: 0
-  m_Name: FN_Five_Seven
+  m_Name: FN_Five_Seven 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
