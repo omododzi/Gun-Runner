@@ -14,7 +14,7 @@ public class shoot : MonoBehaviour
 
     void Update()
     {
-        if (canshot && !move.restarting)
+        if (canshot && !MAgazine.inmagazine)
         {
             Shoot();
             StartCoroutine(Cooldown());

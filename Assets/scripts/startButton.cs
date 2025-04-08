@@ -23,6 +23,7 @@ public class startButton : MonoBehaviour
 
     void OnButtonClick()
     {
+        MAgazine.inmagazine = false;
         start.SetActive(false);
         baff1.SetActive(false);
         baff2.SetActive(false);

@@ -16,6 +16,7 @@ public class RestartButton : MonoBehaviour
 
     public void OnButtonClick()
     {
+        MAgazine.inmagazine = true;
         move.restarting = true;
         move.canMove = false;
         magazine.Inmagaz();
