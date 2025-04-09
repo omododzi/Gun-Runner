@@ -1,18 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
-public class boss : MonoBehaviour
-{ 
-    public static int maxhpboss;
+public class boss : sounds
+{ public static int maxhpboss;
   public int hp = maxhpboss;
   private int maney;
   private bool getmoney = false;
   private Animator animator;
-  public  int speed = 5;
+  public  int speed =10;
   private Rigidbody RB;
   private shoot _shoot;
   private bool fight = false;
   private Transform player;
+  private MAgazine _magazine;
   void Start()
   {
       player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -24,12 +24,14 @@ public class boss : MonoBehaviour
     RB = GetComponent<Rigidbody>();
     _shoot = new shoot();
     animator.SetBool("issleep", true);
+   
   }
 
   void OnCollisionEnter(Collision other)
   {
       if (other.gameObject.CompareTag("Bullet"))
       {
+          PlaySound(soundes[3]);
           hp -= _shoot.damage;
           animator.SetBool("issleep", false);
           fight = true;
@@ -59,7 +61,7 @@ public class boss : MonoBehaviour
           Vector3 direction = (player.position - transform.position).normalized;
 
 // Движение (инвертировано из-за неправильной оси forward)
-          RB.MovePosition(transform.position - direction * speed * Time.deltaTime);
+          transform.position += direction * speed * Time.deltaTime;
 
 // Поворот
           transform.rotation = Quaternion.Slerp(
@@ -69,13 +71,18 @@ public class boss : MonoBehaviour
           );
       }
 
+      
       if (hp <= 0)
       {
+          PlaySound(soundes[4]);
           animator.SetTrigger("die");
           Destroy(gameObject,0.5f);
           score.summ += maney;
           maxhpboss += 200;
           hp = 1000;
+          move.infight = false;
+          move.canMove = true;
+          _magazine.Inmagaz();
       }
   }
 

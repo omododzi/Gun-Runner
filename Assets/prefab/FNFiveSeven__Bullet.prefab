@@ -149,5 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9e029f509108240b0410d685470fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundes: []
   bulletSpeed: 80.9
   bulletSpawn: {fileID: 0}

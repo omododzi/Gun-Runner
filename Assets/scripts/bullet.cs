@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class bullet : sounds
 {
     private Rigidbody rb;
     public float bulletSpeed = 80f; // Скорость пули
     public Transform bulletSpawn; // Точка появления пули
+    public static int summbaff = 100;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,5 +24,15 @@ public class bullet : MonoBehaviour
     private void Update()
     {
         rb.linearVelocity = bulletSpawn.forward * bulletSpeed;
+    }
+
+    public void Upspeedbullet()
+    {
+        if (score.summ >= summbaff)
+        {
+            PlaySound(soundes[1]);
+            bulletSpeed += 10;
+            summbaff += summbaff;
+        }
     }
 }

@@ -2744,6 +2744,7 @@ GameObject:
   - component: {fileID: 1813408217474690333}
   - component: {fileID: 5072528451867644176}
   - component: {fileID: 6282003891274633220}
+  - component: {fileID: -4071730565125563844}
   m_Layer: 0
   m_Name: Blue 2
   m_TagString: Boss
@@ -2871,7 +2872,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1f4800610ca9146969b2d55336113d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundes: []
   hp: 0
+  speed: 10
+--- !u!114 &-4071730565125563844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196076}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a58c189805e774192afbbacbc7622c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundes:
+  - {fileID: 8300000, guid: 30f1489c0f20c4d7a87fb9eee1b17479, type: 3}
+  - {fileID: 8300000, guid: b871312b5c90e48819568703eccfae0d, type: 3}
 --- !u!1 &198178
 GameObject:
   m_ObjectHideFlags: 0

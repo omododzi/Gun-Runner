@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+using TMPro;
 public class MAgazine : MonoBehaviour
 {
     public GameObject start;
@@ -7,13 +8,22 @@ public class MAgazine : MonoBehaviour
     public GameObject baff2;
     public GameObject baff3;
     public static bool inmagazine = true;
+    public TMP_Text upgann;
+    public TMP_Text upspeedBullet;
+    public TMP_Text upspeedShoot;
 
-    public  void Inmagaz()
+    public void Inmagaz()
     {
         inmagazine = true;
         start.SetActive(true);
         baff1.SetActive(true);
         baff2.SetActive(true);
         baff3.SetActive(true);
+    }
+
+    private void Update()
+    {
+        upspeedBullet.text = " "+ bullet.summbaff;
+        upspeedShoot.text = " " + shoot.summbaff;
     }
 }

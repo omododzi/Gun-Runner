@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class startButton : MonoBehaviour
+public class startButton : sounds
 {
     public GameObject start;
     public GameObject baff1;
@@ -23,6 +23,7 @@ public class startButton : MonoBehaviour
 
     void OnButtonClick()
     {
+        PlaySound(soundes[5]);
         MAgazine.inmagazine = false;
         start.SetActive(false);
         baff1.SetActive(false);

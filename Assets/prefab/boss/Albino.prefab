@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8389826627107107684}
   - component: {fileID: 7542069655213889997}
   - component: {fileID: 5737522801561272850}
+  - component: {fileID: 4753197441028886644}
   m_Layer: 0
   m_Name: Albino
   m_TagString: Boss
@@ -141,7 +142,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1f4800610ca9146969b2d55336113d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundes: []
   hp: 0
+  speed: 10
+--- !u!114 &4753197441028886644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100720}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a58c189805e774192afbbacbc7622c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundes:
+  - {fileID: 8300000, guid: 30f1489c0f20c4d7a87fb9eee1b17479, type: 3}
+  - {fileID: 8300000, guid: b871312b5c90e48819568703eccfae0d, type: 3}
 --- !u!1 &102148
 GameObject:
   m_ObjectHideFlags: 0

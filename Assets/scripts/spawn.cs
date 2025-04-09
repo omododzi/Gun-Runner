@@ -9,7 +9,7 @@ public class spawn : MonoBehaviour
 
    public GameObject[] Floor;
    public int spawnedfloor = 1;
-   private int floorsize = 999;
+   private int floorsize = 1000;
    
    public GameObject[] Boss;
    public GameObject[] bossspawnpoints;
@@ -33,11 +33,10 @@ public class spawn : MonoBehaviour
    public void Spawnfloor()
    {
       int randindex = Random.Range(0, Floor.Length);
-      Vector3 pos = new Vector3(209.6f - floorsize, 0.0121555f, 25.9f);
+      Vector3 pos = new Vector3(-235.7f - floorsize, 42.56367f, 241.4513f);
       Instantiate(Floor[randindex], pos, Quaternion.identity);
       spawnedfloor++;
-      floorsize += 999;
-      
+      floorsize += 1000;
    }
 
    public void Spawnbafs()
