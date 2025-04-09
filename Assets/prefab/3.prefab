@@ -44,7 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8005316354712685914}
   m_Layer: 0
-  m_Name: SM_M16A1 3
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
