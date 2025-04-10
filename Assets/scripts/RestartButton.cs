@@ -19,6 +19,6 @@ public class RestartButton : MonoBehaviour
         MAgazine.inmagazine = true;
         move.restarting = true;
         move.canMove = false;
-        magazine.Inmagaz();
+        MAgazine.Inmagaz();
     }
 }

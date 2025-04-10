@@ -13,7 +13,6 @@ public class move : MonoBehaviour
     public static bool canMove = false;
     private spawn _spawn;
     private shoot _shoot;
-    private MAgazine magazine;
     private float speedup;
     public static bool infight = false;
     private Transform Boss;
@@ -27,7 +26,6 @@ public class move : MonoBehaviour
         startpos = gameObject.transform.position;
         _spawn = new spawn();
         _shoot = new shoot();
-        magazine = GetComponent<MAgazine>();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -77,7 +75,6 @@ public class move : MonoBehaviour
         {
             PlaySound(soundes[0]);
             _shoot.damage += 10;
-            Debug.Log(_shoot.damage);
         }
     }
     
@@ -106,7 +103,7 @@ public class move : MonoBehaviour
         if (restarting)
         {
             gameObject.transform.position = startpos;
-            magazine.Inmagaz();
+            MAgazine.Inmagaz();
             canMove = false;
             shoot.canshot = false;
             boss.maxhpboss = 100;
@@ -116,8 +113,6 @@ public class move : MonoBehaviour
         if (infight)
         {
             Vector3 direction = (Boss.position - transform.position).normalized;
-
-
             // Поворот
             transform.rotation = Quaternion.Slerp(
                 transform.rotation, 

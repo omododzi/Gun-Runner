@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class spawn : MonoBehaviour
 {
@@ -22,9 +23,20 @@ public class spawn : MonoBehaviour
    public GameObject[] guns;
    public static int summbaff = 100;
    public static int ourgan = 0;
+   private Vector3 basespawn = new Vector3(697.05f, 3.96f, 27.48f);
+   private Quaternion rotation = Quaternion.Euler(0, -90, 0);
+   private GameObject spawnedgun;
    
    public AudioClip[] soundes ;
    private AudioSource source => GetComponent<AudioSource>();
+
+   void Start()
+   {
+      if (ourgan == 0)
+      {
+         spawnedgun = Instantiate(guns[0], basespawn,rotation);
+      }
+   }
 
    void Update()
    {
@@ -93,9 +105,9 @@ public class spawn : MonoBehaviour
          score.summ -= summbaff;
          PlaySound(soundes[0]);
          ourgan++;
-         Instantiate(guns[ourgan],gameObject.transform.position, Quaternion.identity);
+         Destroy(spawnedgun);
+         spawnedgun = Instantiate(guns[ourgan],basespawn, rotation);
          summbaff *= 2;
-         Destroy(gameObject);
       }
    }
    public void PlaySound(AudioClip clip, float volume = 0.5f)

@@ -12,7 +12,6 @@ public class boss : MonoBehaviour
   private shoot _shoot;
   private bool fight = false;
   private Transform player;
-  private MAgazine _magazine;
   public AudioClip[] soundes;
   private AudioSource source => GetComponent<AudioSource>();
   void Start()
@@ -22,10 +21,10 @@ public class boss : MonoBehaviour
       hp = maxhpboss;
       wall.wallmaxhp += 10;
       maney = hp;
-    animator = GetComponent<Animator>();
-    RB = GetComponent<Rigidbody>();
-    _shoot = new shoot();
-    animator.SetBool("issleep", true);
+        animator = GetComponent<Animator>();
+        RB = GetComponent<Rigidbody>();
+        _shoot = new shoot();
+        animator.SetBool("issleep", true);
    
   }
 
@@ -85,7 +84,7 @@ public class boss : MonoBehaviour
           hp = 1000;
           move.infight = false;
           move.canMove = true;
-          _magazine.Inmagaz();
+          MAgazine.Inmagaz();
       }
   }
 
