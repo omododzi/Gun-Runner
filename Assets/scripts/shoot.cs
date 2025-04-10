@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class shoot : sounds
+public class shoot : MonoBehaviour
 {
     public GameObject bullet; // Префаб пули
     public Transform bulletSpawn; // Точка появления пули
@@ -10,6 +10,9 @@ public class shoot : sounds
     public static bool canshot = false;
     public static float CD = 0.5f;
     public static int summbaff = 100;
+    public AudioClip[] soundes ;
+    private AudioSource source => GetComponent<AudioSource>();
+    
 
     void Update()
     {
@@ -42,5 +45,10 @@ public class shoot : sounds
             CD -= 0.05f;
             summbaff += summbaff;
         }
+    }
+    public void PlaySound(AudioClip clip, float volume = 0.5f)
+    {
+        source.pitch = 1;
+        source.PlayOneShot(clip, volume);
     }
 }

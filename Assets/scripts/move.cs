@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class move : sounds
+public class move : MonoBehaviour
 {
     private Vector3 _input;
     public float moveSpeed = 10f;
@@ -17,6 +17,8 @@ public class move : sounds
     private float speedup;
     public static bool infight = false;
     private Transform Boss;
+    public AudioClip[] soundes = new AudioClip[6];
+    private AudioSource source => GetComponent<AudioSource>();
 
     void Start()
     {
@@ -47,33 +49,33 @@ public class move : sounds
         }
         if (other.CompareTag("Coin"))
         {
-            PlaySound(soundes[2]);
+            PlaySound(soundes[0]);
             score.summ += 10;
             Destroy(other.gameObject);
         }
 
         if (other.CompareTag("Speed"))
         {
-            PlaySound(soundes[2]);
+            PlaySound(soundes[0]);
             moveSpeed += 2;
             Destroy(other.gameObject);
         }
 
         if (other.CompareTag("Star"))
         {
-            PlaySound(soundes[2]);
+            PlaySound(soundes[0]);
             score.summ += 100;
             Destroy(other.gameObject);
         }
 
         if (other.CompareTag("minus"))
         {
-            PlaySound(soundes[2]);
+            PlaySound(soundes[0]);
             _shoot.damage -= 10;
         }
         else if (other.CompareTag("plus"))
         {
-            PlaySound(soundes[2]);
+            PlaySound(soundes[0]);
             _shoot.damage += 10;
             Debug.Log(_shoot.damage);
         }
@@ -129,5 +131,10 @@ public class move : sounds
     {
         _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
         Rb.linearVelocity = new Vector3(-moveSpeed, Rb.linearVelocity.y,_input.x * moveSpeed);
+    }
+    public void PlaySound(AudioClip clip, float volume = 1f)
+    {
+        source.pitch = 1;
+        source.PlayOneShot(clip, volume);
     }
 }

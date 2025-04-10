@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class boss : sounds
+public class boss : MonoBehaviour
 { public static int maxhpboss;
   public int hp = maxhpboss;
   private int maney;
@@ -13,6 +13,8 @@ public class boss : sounds
   private bool fight = false;
   private Transform player;
   private MAgazine _magazine;
+  public AudioClip[] soundes;
+  private AudioSource source => GetComponent<AudioSource>();
   void Start()
   {
       player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -31,7 +33,7 @@ public class boss : sounds
   {
       if (other.gameObject.CompareTag("Bullet"))
       {
-          PlaySound(soundes[3]);
+          PlaySound(soundes[0]);
           hp -= _shoot.damage;
           animator.SetBool("issleep", false);
           fight = true;
@@ -74,7 +76,7 @@ public class boss : sounds
       
       if (hp <= 0)
       {
-          PlaySound(soundes[4]);
+          PlaySound(soundes[1]);
           animator.SetTrigger("die");
           Destroy(gameObject,0.5f);
           score.summ += maney;
@@ -92,5 +94,10 @@ public class boss : sounds
       fight = false;
       animator.SetBool("issleep", true);
       move.restarting = true;
+  }
+  public void PlaySound(AudioClip clip, float volume = 1f)
+  {
+      source.pitch = 1;
+      source.PlayOneShot(clip, volume);
   }
 }
