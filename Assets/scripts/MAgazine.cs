@@ -23,7 +23,8 @@ public class MAgazine : MonoBehaviour
 
     private void Update()
     {
-        upspeedBullet.text = " "+ bullet.summbaff;
-        upspeedShoot.text = " " + shoot.summbaff;
+        //upspeedBullet.text = " "+ bullet.summbaff;
+        //upspeedShoot.text = " " + shoot.summbaff;
+        //upgann.text = " " + spawn.summbaff;
     }
 }

@@ -8,8 +8,8 @@ public class spawn : MonoBehaviour
    private int spawncount = 0;
 
    public GameObject[] Floor;
-   public int spawnedfloor = 1;
-   private int floorsize = 1000;
+   public static int spawnedfloor = 1;
+   private int floorsize = 980;
    
    public GameObject[] Boss;
    public GameObject[] bossspawnpoints;
@@ -18,6 +18,13 @@ public class spawn : MonoBehaviour
    public GameObject[] Bonus;
    public GameObject[] Bonusspawnpoints;
    public int bonuscount = 0;
+
+   public GameObject[] guns;
+   public static int summbaff = 100;
+   public static int ourgan = 0;
+   
+   public AudioClip[] soundes ;
+   private AudioSource source => GetComponent<AudioSource>();
 
    void Update()
    {
@@ -33,10 +40,11 @@ public class spawn : MonoBehaviour
    public void Spawnfloor()
    {
       int randindex = Random.Range(0, Floor.Length);
-      Vector3 pos = new Vector3(-235.7f - floorsize, 42.56367f, 241.4513f);
-      Instantiate(Floor[randindex], pos, Quaternion.identity);
+      Vector3 pos = new Vector3(-235.7f - floorsize, -42.56367f, -217f);
+      Floor[randindex].transform.position = Vector3.zero;
+      Instantiate(Floor[0], pos, Quaternion.identity);
       spawnedfloor++;
-      floorsize += 1000;
+      floorsize += 980;
    }
 
    public void Spawnbafs()
@@ -51,7 +59,8 @@ public class spawn : MonoBehaviour
          }
          else
          {
-            Instantiate(Bafs[0], spawnpoints[spawncount].transform.position, Quaternion.identity);
+            randindex = Random.Range(0, Bafs.Length);
+            Instantiate(Bafs[randindex], spawnpoints[spawncount].transform.position, Quaternion.identity);
          }
          dontpowtor = randindex;
       }
@@ -75,5 +84,23 @@ public class spawn : MonoBehaviour
          int randindex = Random.Range(0, Bonus.Length);
          Instantiate(Bonus[randindex], Bonusspawnpoints[bonuscount].transform.position, Quaternion.identity);
       }
+   }
+
+   public void Upgans()
+   {
+      if (score.summ >= summbaff )
+      {
+         score.summ -= summbaff;
+         PlaySound(soundes[0]);
+         ourgan++;
+         Instantiate(guns[ourgan],gameObject.transform.position, Quaternion.identity);
+         summbaff *= 2;
+         Destroy(gameObject);
+      }
+   }
+   public void PlaySound(AudioClip clip, float volume = 0.5f)
+   {
+      source.pitch = 1;
+      source.PlayOneShot(clip, volume);
    }
 }

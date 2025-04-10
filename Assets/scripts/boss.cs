@@ -78,6 +78,7 @@ public class boss : MonoBehaviour
       {
           PlaySound(soundes[1]);
           animator.SetTrigger("die");
+          spawn.spawnedfloor--;
           Destroy(gameObject,0.5f);
           score.summ += maney;
           maxhpboss += 200;

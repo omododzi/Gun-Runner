@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class shoot : MonoBehaviour
 {
-    public GameObject bullet; // Префаб пули
+    public GameObject bullets; // Префаб пули
     public Transform bulletSpawn; // Точка появления пули
     public int damage = 10; 
     public static bool canshot = false;
@@ -26,7 +26,7 @@ public class shoot : MonoBehaviour
     void Shoot()
     {
         PlaySound(soundes[0]);
-        GameObject newBullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+        GameObject newBullet = Instantiate(bullets, bulletSpawn.position, bulletSpawn.rotation);
         Destroy(newBullet, 1f);
     }
 
@@ -41,9 +41,20 @@ public class shoot : MonoBehaviour
     {
         if (score.summ >= summbaff)
         {
+            score.summ -= summbaff;
             PlaySound(soundes[1]);
             CD -= 0.05f;
             summbaff += summbaff;
+        }
+    }
+    public void Upspeedbullet()
+    {
+        if (score.summ >= summbaff)
+        {
+            score.summ -= summbaff;
+            PlaySound(soundes[1]);
+            bullet.bulletSpeed += 10;
+            bullet.summbaff += bullet.summbaff;
         }
     }
     public void PlaySound(AudioClip clip, float volume = 0.5f)

@@ -4,9 +4,9 @@ using TMPro;
 public class score : MonoBehaviour
 {
     public TMP_Text tmpText;
-    public static int summ = 0;
+    public static int summ = 100000;
 
-    void FixedUpdate()
+    void Update()
     {
         tmpText.text = "" + summ;
     }
