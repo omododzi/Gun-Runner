@@ -47,33 +47,48 @@ public class move : MonoBehaviour
         }
         if (other.CompareTag("Coin"))
         {
-            PlaySound(soundes[0]);
+            if (SwitshMusic.musicstate)
+            {
+                PlaySound(soundes[0]);
+            }
             score.summ += 10;
             Destroy(other.gameObject);
         }
 
         if (other.CompareTag("Speed"))
         {
-            PlaySound(soundes[0]);
+            if (SwitshMusic.musicstate)
+            {
+                PlaySound(soundes[0]);
+            }
             moveSpeed += 2;
             Destroy(other.gameObject);
         }
 
         if (other.CompareTag("Star"))
         {
-            PlaySound(soundes[0]);
+            if (SwitshMusic.musicstate)
+            {
+                PlaySound(soundes[0]);
+            }
             score.summ += 100;
             Destroy(other.gameObject);
         }
 
         if (other.CompareTag("minus"))
         {
-            PlaySound(soundes[0]);
+            if (SwitshMusic.musicstate)
+            {
+                PlaySound(soundes[0]);
+            }
             _shoot.damage -= 10;
         }
         else if (other.CompareTag("plus"))
         {
-            PlaySound(soundes[0]);
+            if (SwitshMusic.musicstate)
+            {
+                PlaySound(soundes[0]);
+            }
             _shoot.damage += 10;
         }
     }

@@ -25,7 +25,10 @@ public class shoot : MonoBehaviour
 
     void Shoot()
     {
-        PlaySound(soundes[0]);
+        if (SwitshMusic.musicstate)
+        {
+            PlaySound(soundes[0]);
+        }
         GameObject newBullet = Instantiate(bullets, bulletSpawn.position, bulletSpawn.rotation);
         Destroy(newBullet, 1f);
     }
@@ -42,7 +45,10 @@ public class shoot : MonoBehaviour
         if (score.summ >= summbaff)
         {
             score.summ -= summbaff;
-            PlaySound(soundes[1]);
+            if (SwitshMusic.musicstate)
+            {
+                PlaySound(soundes[1]);
+            }
             CD -= 0.05f;
             summbaff += summbaff;
         }
@@ -52,7 +58,10 @@ public class shoot : MonoBehaviour
         if (score.summ >= summbaff)
         {
             score.summ -= summbaff;
-            PlaySound(soundes[1]);
+            if (SwitshMusic.musicstate)
+            {
+                PlaySound(soundes[1]);
+            }
             bullet.bulletSpeed += 10;
             bullet.summbaff += bullet.summbaff;
         }

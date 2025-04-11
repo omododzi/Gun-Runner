@@ -100,10 +100,13 @@ public class spawn : MonoBehaviour
 
    public void Upgans()
    {
-      if (score.summ >= summbaff )
+      if (score.summ >= summbaff && ourgan <=4 )
       {
          score.summ -= summbaff;
-         PlaySound(soundes[0]);
+         if (SwitshMusic.musicstate)
+         {
+            PlaySound(soundes[0]);
+         }
          ourgan++;
          Destroy(spawnedgun);
          spawnedgun = Instantiate(guns[ourgan],basespawn, rotation);

@@ -26,7 +26,10 @@ public class startButton : MonoBehaviour
 
     void OnButtonClick()
     {
-       PlaySound(soundes[0]);
+        if (SwitshMusic.musicstate)
+        {
+            PlaySound(soundes[0]);
+        }
         MAgazine.inmagazine = false;
         start.SetActive(false);
         baff1.SetActive(false);

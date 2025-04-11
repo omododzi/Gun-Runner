@@ -11,7 +11,10 @@ public class camera : MonoBehaviour
     public float rotateY;
     void FixedUpdate()
     {
-        target = GameObject.FindWithTag("Player").transform;
+        if (target == null)
+        {
+            target = GameObject.FindWithTag("Player").transform;
+        }
     }
     void Update()
     {

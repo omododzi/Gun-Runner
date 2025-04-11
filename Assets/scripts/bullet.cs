@@ -26,7 +26,4 @@ public class bullet : MonoBehaviour
     {
         rb.linearVelocity = bulletSpawn.forward * bulletSpeed;
     }
-
-   
-   
 }

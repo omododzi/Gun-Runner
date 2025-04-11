@@ -32,7 +32,10 @@ public class boss : MonoBehaviour
   {
       if (other.gameObject.CompareTag("Bullet"))
       {
-          PlaySound(soundes[0]);
+          if (SwitshMusic.musicstate)
+          {
+              PlaySound(soundes[0]);
+          }
           hp -= _shoot.damage;
           animator.SetBool("issleep", false);
           fight = true;
@@ -75,7 +78,10 @@ public class boss : MonoBehaviour
       
       if (hp <= 0)
       {
-          PlaySound(soundes[1]);
+          if (SwitshMusic.musicstate)
+          {
+              PlaySound(soundes[1]);
+          }
           animator.SetTrigger("die");
           spawn.spawnedfloor--;
           Destroy(gameObject,0.5f);
