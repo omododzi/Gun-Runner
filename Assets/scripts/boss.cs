@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class boss : MonoBehaviour
 { public static int maxhpboss;
-  public int hp = maxhpboss;
+  private int hp = maxhpboss += 10;
   private int maney;
   private bool getmoney = false;
   private Animator animator;
@@ -101,7 +101,7 @@ public class boss : MonoBehaviour
       animator.SetBool("issleep", true);
       move.restarting = true;
   }
-  public void PlaySound(AudioClip clip, float volume = 1f)
+  public void PlaySound(AudioClip clip, float volume = 0.5f)
   {
       source.pitch = 1;
       source.PlayOneShot(clip, volume);
