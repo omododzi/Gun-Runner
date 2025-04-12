@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class spawn : MonoBehaviour
 {
@@ -9,8 +12,8 @@ public class spawn : MonoBehaviour
    private int spawncount = 0;
 
    public GameObject[] Floor;
-   public static int spawnedfloor = 1;
-   private int floorsize = 992;
+   public static int spawnedfloor = 0;
+   private int floorsize = 0;
    
    public GameObject[] Boss;
    public GameObject[] bossspawnpoints;
@@ -30,6 +33,8 @@ public class spawn : MonoBehaviour
    public AudioClip[] soundes ;
    private AudioSource source => GetComponent<AudioSource>();
 
+   private List<GameObject> spawned = new List<GameObject>();
+
    void Start()
    {
       if (ourgan == 0)
@@ -40,13 +45,17 @@ public class spawn : MonoBehaviour
 
    void Update()
    {
-      if (spawnedfloor <= 4)
+      if (spawnedfloor <= 2)
       {
          Spawnfloor();
       }
       Spawnbafs();
       SpawnBoss();
       SpawnBonus();
+      if (move.restarting)
+      {
+         Reconstructoion();
+      }
    }
 
    public void Spawnfloor()
@@ -71,17 +80,17 @@ public class spawn : MonoBehaviour
             {
                float deff = Random.Range(-8f, 8f);
                Vector3 randDeff = new Vector3(spawnpoints[spawncount].transform.position.x, spawnpoints[spawncount].transform.position.y, spawnpoints[spawncount].transform.position.z - deff);
-               Instantiate(Bafs[randindex], randDeff, Quaternion.identity);
+               spawned.Add(Instantiate(Bafs[randindex], randDeff, Quaternion.identity));
             }
             else
             {
-               Instantiate(Bafs[randindex], spawnpoints[spawncount].transform.position, Quaternion.identity);
+               spawned.Add(Instantiate(Bafs[randindex], spawnpoints[spawncount].transform.position, Quaternion.identity));
             }
          }
          else
          {
             randindex = Random.Range(0, Bafs.Length);
-            Instantiate(Bafs[randindex], spawnpoints[spawncount].transform.position, Quaternion.identity);
+            spawned.Add(Instantiate(Bafs[randindex], spawnpoints[spawncount].transform.position, Quaternion.identity));
          }
          dontpowtor = randindex;
       }
@@ -93,7 +102,7 @@ public class spawn : MonoBehaviour
       for (; bosscount < bossspawnpoints.Length; bosscount++)
       {
          int randindex = Random.Range(0, Boss.Length);
-         Instantiate(Boss[randindex], bossspawnpoints[bosscount].transform.position, Quaternion.identity);
+         spawned.Add(Instantiate(Boss[randindex], bossspawnpoints[bosscount].transform.position, Quaternion.identity));
       }
    }
 
@@ -103,8 +112,22 @@ public class spawn : MonoBehaviour
       for (; bonuscount < Bonus.Length; bonuscount++)
       {
          int randindex = Random.Range(0, Bonus.Length);
-         Instantiate(Bonus[randindex], Bonusspawnpoints[bonuscount].transform.position, Quaternion.identity);
+         spawned.Add(Instantiate(Bonus[randindex], Bonusspawnpoints[bonuscount].transform.position, Quaternion.identity));
       }
+   }
+
+   private void Reconstructoion()
+   {
+      for (int i  = 0; i  < spawned.Count; i ++)
+      {
+         Destroy(spawned[i]);
+      }
+      spawned.Clear();
+        
+      // Сброс счетчиков
+      spawnedfloor = 0;
+      floorsize = 992;
+     
    }
 
    public void Upgans()

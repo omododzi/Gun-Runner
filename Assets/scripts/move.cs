@@ -99,7 +99,7 @@ public class move : MonoBehaviour
             speedup = Time.deltaTime;
         }
 
-        if (speedup % 10 == 0 && speedup > 1)
+        if (speedup % 5 == 0 && speedup > 1)
         {
             moveSpeed += 1f;
         }
