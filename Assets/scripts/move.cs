@@ -12,7 +12,6 @@ public class move : MonoBehaviour
     private Vector3 startpos;
     public static bool canMove = false;
     private spawn _spawn;
-    private shoot _shoot;
     private float speedup;
     public static bool infight = false;
     private Transform Boss;
@@ -25,7 +24,6 @@ public class move : MonoBehaviour
         Rb = GetComponent<Rigidbody>();
         startpos = gameObject.transform.position;
         _spawn = new spawn();
-        _shoot = new shoot();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -81,7 +79,7 @@ public class move : MonoBehaviour
             {
                 PlaySound(soundes[0]);
             }
-            _shoot.damage -= 10;
+            shoot.damage -= 10;
         }
         else if (other.CompareTag("plus"))
         {
@@ -89,7 +87,7 @@ public class move : MonoBehaviour
             {
                 PlaySound(soundes[0]);
             }
-            _shoot.damage += 10;
+            shoot.damage += 10;
         }
     }
     
@@ -134,6 +132,14 @@ public class move : MonoBehaviour
                 Quaternion.LookRotation(direction), 
                 10f * Time.deltaTime
             );
+        }else if (Boss == null)
+        {
+            infight = false;
+        }
+
+        if (!infight)
+        {
+            gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
         }
     }
     

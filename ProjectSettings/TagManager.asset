@@ -23,6 +23,7 @@ TagManager:
   - Star
   - Baff4
   - cameratarg
+  - wall
   layers:
   - Default
   - TransparentFX

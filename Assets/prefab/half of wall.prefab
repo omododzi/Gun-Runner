@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4410014143361546920}
   - component: {fileID: 8563472491377859795}
   - component: {fileID: 3880258298436454516}
-  - component: {fileID: 3881761273369513051}
   m_Layer: 0
   m_Name: half of wall
   m_TagString: trap
@@ -109,17 +108,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3881761273369513051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385712950897602944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd38af63280bf4640a71cd7f749c5209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tmpText: {fileID: 0}
-  hp: 100

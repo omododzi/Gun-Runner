@@ -9,23 +9,21 @@ public class boss : MonoBehaviour
   private Animator animator;
   public  int speed =10;
   private Rigidbody RB;
-  private shoot _shoot;
   private bool fight = false;
   private Transform player;
   public AudioClip[] soundes;
   private AudioSource source => GetComponent<AudioSource>();
+  private bool cansound = true;
   void Start()
   {
-      player = GameObject.FindGameObjectWithTag("Player").transform;
+     
       maxhpboss += 100;
       hp = maxhpboss;
       wall.wallmaxhp += 10;
       maney = hp;
-        animator = GetComponent<Animator>();
-        RB = GetComponent<Rigidbody>();
-        _shoot = new shoot();
-        animator.SetBool("issleep", true);
-   
+      animator = GetComponent<Animator>();
+      RB = GetComponent<Rigidbody>();
+      animator.SetBool("issleep", true);
   }
 
   void OnCollisionEnter(Collision other)
@@ -34,16 +32,22 @@ public class boss : MonoBehaviour
       {
           if (SwitshMusic.musicstate)
           {
-              PlaySound(soundes[0]);
+              if (cansound)
+              {
+                  PlaySound(soundes[0]);
+                  StartCoroutine(SoundKD());
+                  
+              }
           }
-          hp -= _shoot.damage;
           animator.SetBool("issleep", false);
+          hp -= shoot.damage;
           fight = true;
       }
 
       if (other.gameObject.CompareTag("Player"))
       {
           animator.SetTrigger("atak");
+          move.infight = false;
           StartCoroutine(Coldown());
       }
   }
@@ -60,6 +64,10 @@ public class boss : MonoBehaviour
 
   void Update()
   {
+      if (player == null)
+      {
+          player = GameObject.FindGameObjectWithTag("Player").transform;
+      }
       if (fight && hp > 0)
       {
           Vector3 direction = (player.position - transform.position).normalized;
@@ -90,7 +98,6 @@ public class boss : MonoBehaviour
           hp = 1000;
           move.infight = false;
           move.canMove = true;
-          MAgazine.Inmagaz();
       }
   }
 
@@ -105,5 +112,12 @@ public class boss : MonoBehaviour
   {
       source.pitch = 1;
       source.PlayOneShot(clip, volume);
+  }
+
+  IEnumerator SoundKD()
+  {
+      cansound = false;
+      yield return new WaitForSeconds(0.5f);
+      cansound = true;
   }
 }

@@ -66,8 +66,17 @@ public class spawn : MonoBehaviour
       {
          int randindex = Random.Range(0, Bafs.Length);
          if (dontpowtor != randindex)
-         {  
-            Instantiate(Bafs[randindex], spawnpoints[spawncount].transform.position, Quaternion.identity);
+         {
+            if (randindex == 1)
+            {
+               float deff = Random.Range(-8f, 8f);
+               Vector3 randDeff = new Vector3(spawnpoints[spawncount].transform.position.x, spawnpoints[spawncount].transform.position.y, spawnpoints[spawncount].transform.position.z - deff);
+               Instantiate(Bafs[randindex], randDeff, Quaternion.identity);
+            }
+            else
+            {
+               Instantiate(Bafs[randindex], spawnpoints[spawncount].transform.position, Quaternion.identity);
+            }
          }
          else
          {
@@ -111,6 +120,33 @@ public class spawn : MonoBehaviour
          Destroy(spawnedgun);
          spawnedgun = Instantiate(guns[ourgan],basespawn, rotation);
          summbaff *= 2;
+      }
+   }
+   public void Upspeedbullet()
+   {
+        
+      if (score.summ >= bullet.summbaff)
+      {
+         score.summ -= bullet.summbaff;
+         if (SwitshMusic.musicstate)
+         {
+            PlaySound(soundes[0]);
+         }
+         bullet.bulletSpeed += 10;
+         bullet.summbaff *= 2;
+      }
+   }
+   public void UpSpeedShoot()
+   {
+      if (score.summ >= shoot.summbaff)
+      {
+         score.summ -= shoot.summbaff;
+         if (SwitshMusic.musicstate)
+         {
+            PlaySound(soundes[0]);
+         }
+         shoot.CD -= 0.05f;
+         shoot.summbaff *= 2;
       }
    }
    public void PlaySound(AudioClip clip, float volume = 0.5f)

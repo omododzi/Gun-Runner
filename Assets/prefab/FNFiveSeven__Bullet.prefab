@@ -150,10 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9e029f509108240b0410d685470fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 80.9
   bulletSpawn: {fileID: 0}
-  soundes:
-  - {fileID: 8300000, guid: 4729b5c812f704942b850d9366cb8e8d, type: 3}
 --- !u!82 &5955524193612665404
 AudioSource:
   m_ObjectHideFlags: 0

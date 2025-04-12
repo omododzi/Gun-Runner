@@ -8,9 +8,9 @@ public class MAgazine : MonoBehaviour
     public static GameObject baff2;
     public static GameObject baff3;
     public static bool inmagazine = true;
-    public TMP_Text upgann;
-    public TMP_Text upspeedBullet;
-    public TMP_Text upspeedShoot;
+    public GameObject upgann;
+    public GameObject upspeedBullet;
+    public GameObject upspeedShoot;
 
     void Start()
     {
@@ -18,6 +18,9 @@ public class MAgazine : MonoBehaviour
         baff1 = GameObject.FindGameObjectWithTag("Baff1");
         baff2 = GameObject.FindGameObjectWithTag("Baff4");
         baff3 = GameObject.FindGameObjectWithTag("Baff3");
+        upgann.SetActive(false);
+        upspeedBullet.SetActive(false);
+        upspeedShoot.SetActive(false);
     }
     public static void Inmagaz()
     {
@@ -30,8 +33,31 @@ public class MAgazine : MonoBehaviour
 
     private void Update()
     {
-        //upspeedBullet.text = " "+ bullet.summbaff;
-        //upspeedShoot.text = " " + shoot.summbaff;
-        //upgann.text = " " + spawn.summbaff;
+        if (inmagazine && score.summ >= spawn.summbaff)
+        {
+            upgann.SetActive(true);
+        }
+        else
+        {
+            upgann.SetActive(false);
+        }
+
+        if (inmagazine && score.summ >= shoot.summbaff)
+        {
+            upspeedShoot.SetActive(true);
+        }
+        else
+        {
+            upspeedShoot.SetActive(false);
+        }
+
+        if (inmagazine && score.summ >= bullet.summbaff)
+        {
+            upspeedBullet.SetActive(true);
+        }
+        else
+        {
+            upspeedBullet.SetActive(false);
+        }
     }
 }
