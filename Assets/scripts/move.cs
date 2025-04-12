@@ -115,6 +115,7 @@ public class move : MonoBehaviour
         
         if (restarting)
         {
+            YGadd.TryShowFullscreenAdWithChance(101);
             gameObject.transform.position = startpos;
             MAgazine.Inmagaz();
             canMove = false;

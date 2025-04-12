@@ -10,7 +10,7 @@ public class spawn : MonoBehaviour
 
    public GameObject[] Floor;
    public static int spawnedfloor = 1;
-   private int floorsize = 980;
+   private int floorsize = 992;
    
    public GameObject[] Boss;
    public GameObject[] bossspawnpoints;
@@ -56,7 +56,7 @@ public class spawn : MonoBehaviour
       Floor[randindex].transform.position = Vector3.zero;
       Instantiate(Floor[0], pos, Quaternion.identity);
       spawnedfloor++;
-      floorsize += 980;
+      floorsize += 992;
    }
 
    public void Spawnbafs()

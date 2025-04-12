@@ -11,6 +11,8 @@ public class MAgazine : MonoBehaviour
     public GameObject upgann;
     public GameObject upspeedBullet;
     public GameObject upspeedShoot;
+    public GameObject MusicOff;
+    public GameObject MusicOn;
 
     void Start()
     {
@@ -21,6 +23,8 @@ public class MAgazine : MonoBehaviour
         upgann.SetActive(false);
         upspeedBullet.SetActive(false);
         upspeedShoot.SetActive(false);
+        MusicOff.SetActive(false);
+        MusicOn.SetActive(true);
     }
     public static void Inmagaz()
     {
@@ -33,7 +37,7 @@ public class MAgazine : MonoBehaviour
 
     private void Update()
     {
-        if (inmagazine && score.summ >= spawn.summbaff)
+        if (inmagazine && score.summ >= spawn.summbaff && spawn.ourgan <= 4)
         {
             upgann.SetActive(true);
         }
@@ -58,6 +62,17 @@ public class MAgazine : MonoBehaviour
         else
         {
             upspeedBullet.SetActive(false);
+        }
+
+        if (SwitshMusic.musicstate)
+        {
+            MusicOn.SetActive(true);
+            MusicOff.SetActive(false);
+        }
+        else
+        {
+            MusicOff.SetActive(true);
+            MusicOn.SetActive(false);
         }
     }
 }
