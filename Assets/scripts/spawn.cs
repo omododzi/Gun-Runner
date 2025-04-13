@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
-
+using YG;
 public class spawn : MonoBehaviour
 {
    public GameObject[] Bafs;
@@ -35,11 +34,38 @@ public class spawn : MonoBehaviour
 
    private List<GameObject> spawned = new List<GameObject>();
 
+   private int upgreadedgun;
+   private int upgreadebullet;
+   private int upgreadespeedshoot;
+
    void Start()
    {
       if (ourgan == 0)
       {
          spawnedgun = Instantiate(guns[0], basespawn,rotation);
+      }
+
+      upgreadedgun = YandexGame.savesData.upgn;
+      upgreadespeedshoot =  YandexGame.savesData.speedshoot;
+      upgreadebullet =  YandexGame.savesData.ubbullet;
+      for (int i  = 0; i  < upgreadedgun; i ++)
+      {
+         ourgan++;
+         Destroy(spawnedgun);
+         spawnedgun = Instantiate(guns[ourgan],basespawn, rotation);
+         summbaff *= 2;
+      }
+
+      for (int i = 0; i < upgreadespeedshoot; i++)
+      {
+         shoot.CD -= 0.05f;
+         shoot.summbaff *= 2;
+      }
+
+      for (int i = 0; i < upgreadebullet; i++)
+      {
+         bullet.bulletSpeed += 10;
+         bullet.summbaff *= 2;
       }
    }
 
@@ -143,6 +169,10 @@ public class spawn : MonoBehaviour
          Destroy(spawnedgun);
          spawnedgun = Instantiate(guns[ourgan],basespawn, rotation);
          summbaff *= 2;
+         if (upgreadedgun >= 1)
+         {
+            YGadd.TryShowFullscreenAdWithChance(101);
+         }
       }
    }
    public void Upspeedbullet()
@@ -157,6 +187,10 @@ public class spawn : MonoBehaviour
          }
          bullet.bulletSpeed += 10;
          bullet.summbaff *= 2;
+         if (upgreadebullet >= 1)
+         {
+            YGadd.TryShowFullscreenAdWithChance(101);
+         }
       }
    }
    public void UpSpeedShoot()
@@ -170,6 +204,10 @@ public class spawn : MonoBehaviour
          }
          shoot.CD -= 0.05f;
          shoot.summbaff *= 2;
+         if (upgreadespeedshoot >= 1)
+         {
+            YGadd.TryShowFullscreenAdWithChance(101);
+         }
       }
    }
    public void PlaySound(AudioClip clip, float volume = 0.5f)

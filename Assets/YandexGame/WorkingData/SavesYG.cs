@@ -12,7 +12,10 @@ namespace YG
 
         // Тестовые сохранения для демо сцены
         // Можно удалить этот код, но тогда удалите и демо (папка Example)
-        public int money = 1;                       // Можно задать полям значения по умолчанию
+        public int money = 100; // Можно задать полям значения по умолчанию
+        public int upgn = 0;
+        public int ubbullet = 0;
+        public int speedshoot = 0;
         public string newPlayerName = "Hello!";
         public bool[] openLevels = new bool[3];
 
