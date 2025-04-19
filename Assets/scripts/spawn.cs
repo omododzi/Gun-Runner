@@ -25,7 +25,7 @@ public class spawn : MonoBehaviour
    public GameObject[] guns;
    public static int summbaff = 100;
    public static int ourgan = 0;
-   private Vector3 basespawn = new Vector3(697.05f, 3.96f, 27.48f);
+   private Vector3 basespawn = new Vector3(690f, 4f, 25f);
    private Quaternion rotation = Quaternion.Euler(0, -90, 0);
    private GameObject spawnedgun;
    

@@ -33,10 +33,19 @@ public class MAgazine : MonoBehaviour
         baff1.SetActive(true);
         baff2.SetActive(true);
         baff3.SetActive(true);
+        move.canMove = false;
     }
 
     private void Update()
     {
+        if (!inmagazine)
+        {
+            start.SetActive(false);
+            baff1.SetActive(false);
+            baff2.SetActive(false);
+            baff3.SetActive(false);   
+        }
+
         if (inmagazine && score.summ >= spawn.summbaff && spawn.ourgan <= 4)
         {
             upgann.SetActive(true);

@@ -109,7 +109,7 @@ public class move : MonoBehaviour
         Debug.Log(MAgazine.inmagazine);
         if (!MAgazine.inmagazine){
             speedup = Time.deltaTime;
-        }else if (MAgazine.inmagazine)
+        } if (MAgazine.inmagazine)
         {
             canMove = false;
         }
