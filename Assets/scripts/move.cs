@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class move : MonoBehaviour
@@ -90,13 +91,27 @@ public class move : MonoBehaviour
             shoot.damage += 10;
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Boss"))
+        {
+            canMove = true;
+            infight = false;
+            MAgazine.inmagazine = false;
+        }
+    }
     
     
 
     void Update()
     {
+        Debug.Log(MAgazine.inmagazine);
         if (!MAgazine.inmagazine){
             speedup = Time.deltaTime;
+        }else if (MAgazine.inmagazine)
+        {
+            canMove = false;
         }
 
         if (speedup % 5 == 0 && speedup > 1)
@@ -121,6 +136,7 @@ public class move : MonoBehaviour
             shoot.canshot = false;
             boss.maxhpboss = 100;
             restarting = false;
+            StartCoroutine(AdCooldown());
         }
 
         if (infight)
@@ -141,6 +157,11 @@ public class move : MonoBehaviour
         {
             gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
         }
+
+        if (!infight && !MAgazine.inmagazine)
+        {
+            canMove = true;
+        }
     }
     
     public void Move()
@@ -152,5 +173,11 @@ public class move : MonoBehaviour
     {
         source.pitch = 1;
         source.PlayOneShot(clip, volume);
+    }
+
+    IEnumerator AdCooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        YGadd.TryShowFullscreenAdWithChance(100);
     }
 }

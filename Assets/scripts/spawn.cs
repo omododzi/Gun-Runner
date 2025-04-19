@@ -6,7 +6,7 @@ using YG;
 public class spawn : MonoBehaviour
 {
    public GameObject[] Bafs;
-   private GameObject[] spawnpoints;
+   private List<GameObject> spawnpoints = new List<GameObject>();
    private int dontpowtor = 10;
    private int spawncount = 0;
 
@@ -15,11 +15,11 @@ public class spawn : MonoBehaviour
    private int floorsize = 0;
    
    public GameObject[] Boss;
-   public GameObject[] bossspawnpoints;
+   private List<GameObject> bossspawnpoints = new List<GameObject>();
    public int bosscount = 0;
 
    public GameObject[] Bonus;
-   public GameObject[] Bonusspawnpoints;
+   private List<GameObject> Bonusspawnpoints= new List<GameObject>();
    public int bonuscount = 0;
 
    public GameObject[] guns;
@@ -89,15 +89,17 @@ public class spawn : MonoBehaviour
       int randindex = Random.Range(0, Floor.Length);
       Vector3 pos = new Vector3(-235.7f - floorsize, -42.56367f, -217f);
       Floor[randindex].transform.position = Vector3.zero;
-      Instantiate(Floor[0], pos, Quaternion.identity);
+      spawned.Add(Instantiate(Floor[0], pos, Quaternion.identity));
       spawnedfloor++;
       floorsize += 992;
+      spawnpoints = new List<GameObject>(GameObject.FindGameObjectsWithTag("Spawntarg"));
+      bossspawnpoints = new List<GameObject>(GameObject.FindGameObjectsWithTag("bossSpawn"));
+      Bonusspawnpoints = new List<GameObject>(GameObject.FindGameObjectsWithTag("BonusSpawn"));
    }
 
    public void Spawnbafs()
    {
-      spawnpoints = GameObject.FindGameObjectsWithTag("Spawntarg");
-      for (; spawncount < spawnpoints.Length; spawncount++)
+      for (; spawncount < spawnpoints.Count; spawncount++)
       {
          int randindex = Random.Range(0, Bafs.Length);
          if (dontpowtor != randindex)
@@ -124,8 +126,7 @@ public class spawn : MonoBehaviour
 
    public void SpawnBoss()
    {
-      bossspawnpoints = GameObject.FindGameObjectsWithTag("bossSpawn");
-      for (; bosscount < bossspawnpoints.Length; bosscount++)
+      for (; bosscount < bossspawnpoints.Count; bosscount++)
       {
          int randindex = Random.Range(0, Boss.Length);
          spawned.Add(Instantiate(Boss[randindex], bossspawnpoints[bosscount].transform.position, Quaternion.identity));
@@ -134,8 +135,7 @@ public class spawn : MonoBehaviour
 
    void SpawnBonus()
    {
-      Bonusspawnpoints = GameObject.FindGameObjectsWithTag("BonusSpawn");
-      for (; bonuscount < Bonus.Length; bonuscount++)
+      for (; bonuscount < Bonusspawnpoints.Count; bonuscount++)
       {
          int randindex = Random.Range(0, Bonus.Length);
          spawned.Add(Instantiate(Bonus[randindex], Bonusspawnpoints[bonuscount].transform.position, Quaternion.identity));
@@ -144,16 +144,21 @@ public class spawn : MonoBehaviour
 
    private void Reconstructoion()
    {
-      for (int i  = 0; i  < spawned.Count; i ++)
+      // Уничтожаем все созданные объекты
+      for (int i = 0; i < spawned.Count; i++)
       {
-         Destroy(spawned[i]);
+         if (spawned[i] != null)
+            Destroy(spawned[i]);
       }
       spawned.Clear();
-        
-      // Сброс счетчиков
+    
+      // Полный сброс состояния
       spawnedfloor = 0;
-      floorsize = 992;
-     
+      floorsize = 0;
+      spawncount = 0; // Важно! Сбрасываем счетчик
+      dontpowtor = 10; // Сбрасываем значение
+      bosscount = 0;
+      spawnpoints.Clear();
    }
 
    public void Upgans()
@@ -169,10 +174,6 @@ public class spawn : MonoBehaviour
          Destroy(spawnedgun);
          spawnedgun = Instantiate(guns[ourgan],basespawn, rotation);
          summbaff *= 2;
-         if (upgreadedgun >= 1)
-         {
-            YGadd.TryShowFullscreenAdWithChance(101);
-         }
       }
    }
    public void Upspeedbullet()
@@ -187,10 +188,6 @@ public class spawn : MonoBehaviour
          }
          bullet.bulletSpeed += 10;
          bullet.summbaff *= 2;
-         if (upgreadebullet >= 1)
-         {
-            YGadd.TryShowFullscreenAdWithChance(101);
-         }
       }
    }
    public void UpSpeedShoot()
@@ -204,10 +201,7 @@ public class spawn : MonoBehaviour
          }
          shoot.CD -= 0.05f;
          shoot.summbaff *= 2;
-         if (upgreadespeedshoot >= 1)
-         {
-            YGadd.TryShowFullscreenAdWithChance(101);
-         }
+        
       }
    }
    public void PlaySound(AudioClip clip, float volume = 0.5f)

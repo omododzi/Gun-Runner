@@ -8,7 +8,7 @@ public class score : MonoBehaviour
 
     void Start()
     {
-        summ =YandexGame.savesData.money ;
+        summ =YandexGame.savesData.money;
     }
   
 }

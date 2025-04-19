@@ -19,7 +19,6 @@ public class startButton : MonoBehaviour
         Button button = GetComponent<Button>();
         if (button != null)
             button.onClick.AddListener(OnButtonClick);
-       
     }
 
    

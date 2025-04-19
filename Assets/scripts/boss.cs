@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -44,7 +45,7 @@ public class boss : MonoBehaviour
           fight = true;
       }
 
-      if (other.gameObject.CompareTag("Player"))
+      if (other.gameObject.CompareTag("Player") && fight && hp>=1)
       {
           animator.SetTrigger("atak");
           move.infight = false;
@@ -72,10 +73,9 @@ public class boss : MonoBehaviour
       {
           Vector3 direction = (player.position - transform.position).normalized;
 
-// Движение (инвертировано из-за неправильной оси forward)
+
           transform.position += direction * speed * Time.deltaTime;
 
-// Поворот
           transform.rotation = Quaternion.Slerp(
               transform.rotation, 
               Quaternion.LookRotation(direction), 
@@ -98,7 +98,15 @@ public class boss : MonoBehaviour
           hp = 1000;
           move.infight = false;
           move.canMove = true;
+          MAgazine.inmagazine = false;
       }
+  }
+
+  private void OnDestroy()
+  {
+      move.canMove = true;
+      move.infight = false;
+      MAgazine.inmagazine = false;
   }
 
   IEnumerator Coldown()
