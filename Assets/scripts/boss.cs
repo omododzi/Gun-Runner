@@ -98,7 +98,7 @@ public class boss : MonoBehaviour
           hp = 1000;
           move.infight = false;
           move.canMove = true;
-          MAgazine.inmagazine = false;
+          
       }
   }
 
@@ -106,7 +106,7 @@ public class boss : MonoBehaviour
   {
       move.canMove = true;
       move.infight = false;
-      MAgazine.inmagazine = false;
+      //MAgazine.inmagazine = false;
   }
 
   IEnumerator Coldown()

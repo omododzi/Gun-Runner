@@ -107,7 +107,11 @@ public class move : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(MAgazine.inmagazine);
+        Debug.Log(MAgazine.inmagazine);
+        if (MAgazine.inmagazine)
+        {
+            canMove = false;
+        }
     
         if (canMove)
         {
@@ -138,6 +142,10 @@ public class move : MonoBehaviour
             infight = false;
         }
 
+        if (!infight && !MAgazine.inmagazine)
+        {
+            canMove = true;
+        }
         if (!infight)
         {
             gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
