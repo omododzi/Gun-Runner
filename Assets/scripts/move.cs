@@ -16,6 +16,7 @@ public class move : MonoBehaviour
     private float speedup;
     public static bool infight = false;
     private Transform Boss;
+    private MAgazine _magazine = new MAgazine();
     public AudioClip[] soundes = new AudioClip[6];
     private AudioSource source => GetComponent<AudioSource>();
 
@@ -98,7 +99,7 @@ public class move : MonoBehaviour
         {
             canMove = true;
             infight = false;
-            MAgazine.inmagazine = false;
+            //MAgazine.inmagazine = false;
         }
     }
     
@@ -106,36 +107,20 @@ public class move : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(MAgazine.inmagazine);
-        if (!MAgazine.inmagazine){
-            speedup = Time.deltaTime;
-        } if (MAgazine.inmagazine)
-        {
-            canMove = false;
-        }
-
-        if (speedup % 5 == 0 && speedup > 1)
-        {
-            moveSpeed += 1f;
-        }
-        
+        //Debug.Log(MAgazine.inmagazine);
+    
         if (canMove)
         {
             Move();
         }
         else
         {
-            Rb.linearVelocity = Vector3.zero;
+            Rb.linearVelocity = Vector3.zero; // Полная остановка
         }
-        
+    
         if (restarting)
         {
-            gameObject.transform.position = startpos;
-            MAgazine.Inmagaz();
-            canMove = false;
-            shoot.canshot = false;
-            boss.maxhpboss = 100;
-            restarting = false;
+            restarting = false; // Сразу сбрасываем флаг
             StartCoroutine(AdCooldown());
         }
 
@@ -157,11 +142,6 @@ public class move : MonoBehaviour
         {
             gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
         }
-
-        if (!infight && !MAgazine.inmagazine)
-        {
-            canMove = true;
-        }
     }
     
     public void Move()
@@ -177,7 +157,18 @@ public class move : MonoBehaviour
 
     IEnumerator AdCooldown()
     {
+        // Полный сброс перед ожиданием
+        gameObject.transform.position = startpos;
+        Rb.linearVelocity = Vector3.zero;
+        canMove = false;
+        shoot.canshot = false;
+        MAgazine.inmagazine = true;
+        _magazine.Inmagaz();
+    
         yield return new WaitForSeconds(1f);
+    
+        // После рекламы восстанавливаем управление
+    
         YGadd.TryShowFullscreenAdWithChance(100);
     }
 }

@@ -1030,6 +1030,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410172519c24c644e96f9b9e38d78aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: {fileID: 0}
+  baff1: {fileID: 0}
+  baff2: {fileID: 0}
+  baff3: {fileID: 0}
   upgann: {fileID: 319130611}
   upspeedBullet: {fileID: 579673924}
   upspeedShoot: {fileID: 800461354}
@@ -1738,7 +1742,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 831095224}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 831095226}
+        m_TargetAssemblyTypeName: startButton, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &831095224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,8 +1809,6 @@ MonoBehaviour:
   baff1: {fileID: 1310348725}
   baff2: {fileID: 1721775391}
   baff3: {fileID: 1174607628}
-  soundes:
-  - {fileID: 8300000, guid: 3233ce03ebb6942f48f6df3640b5ca57, type: 3}
 --- !u!82 &831095227
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2467,13 +2481,11 @@ MonoBehaviour:
   - {fileID: 109776, guid: 8e302007cba46d94b970c6a0955b9628, type: 3}
   - {fileID: 130416, guid: 70f277dcf2cdfdd4db7ee0ca76e07767, type: 3}
   - {fileID: 139696, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
-  bossspawnpoints: []
   bosscount: 0
   Bonus:
   - {fileID: 5723935500290570162, guid: ec0a990d21633d540b6d65debdb8a634, type: 3}
   - {fileID: 6305237352501379244, guid: 351dbf8619f3e4f46b809a21adb9d6fd, type: 3}
   - {fileID: 4447156072313147642, guid: 567e07f31e86a704090b67a7b7dbd9fb, type: 3}
-  Bonusspawnpoints: []
   bonuscount: 0
   guns:
   - {fileID: 6949219968297497114, guid: 55b1fd5f577255c4a8338b61385780ec, type: 3}

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class RestartButton : MonoBehaviour
 {
-    private MAgazine magazine;
+    private MAgazine magazine = new MAgazine();
 
     void Start()
     {
@@ -19,6 +19,6 @@ public class RestartButton : MonoBehaviour
         MAgazine.inmagazine = true;
         move.restarting = true;
         move.canMove = false;
-        MAgazine.Inmagaz();
+        magazine.Inmagaz();
     }
 }

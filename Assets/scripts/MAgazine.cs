@@ -3,10 +3,10 @@ using UnityEngine;
 using TMPro;
 public class MAgazine : MonoBehaviour
 {
-    public static GameObject start;
-    public static GameObject baff1;
-    public static GameObject baff2;
-    public static GameObject baff3;
+    public  GameObject start;
+    public  GameObject baff1;
+    public  GameObject baff2;
+    public  GameObject baff3;
     public static bool inmagazine = true;
     public GameObject upgann;
     public GameObject upspeedBullet;
@@ -26,26 +26,22 @@ public class MAgazine : MonoBehaviour
         MusicOff.SetActive(false);
         MusicOn.SetActive(true);
     }
-    public static void Inmagaz()
+    public void Inmagaz()
     {
-        inmagazine = true;
         start.SetActive(true);
         baff1.SetActive(true);
         baff2.SetActive(true);
         baff3.SetActive(true);
         move.canMove = false;
+        inmagazine = true;
     }
 
     private void Update()
     {
-        if (!inmagazine)
+        if (inmagazine)
         {
-            start.SetActive(false);
-            baff1.SetActive(false);
-            baff2.SetActive(false);
-            baff3.SetActive(false);   
+            Debug.Log("Inmagazine");
         }
-
         if (inmagazine && score.summ >= spawn.summbaff && spawn.ourgan <= 4)
         {
             upgann.SetActive(true);
