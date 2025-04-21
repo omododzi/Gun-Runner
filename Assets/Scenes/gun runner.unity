@@ -1030,10 +1030,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410172519c24c644e96f9b9e38d78aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 0}
-  baff1: {fileID: 0}
-  baff2: {fileID: 0}
-  baff3: {fileID: 0}
+  start: {fileID: 831095220}
+  baff1: {fileID: 1310348725}
+  baff2: {fileID: 1721775391}
+  baff3: {fileID: 1174607628}
   upgann: {fileID: 319130611}
   upspeedBullet: {fileID: 579673924}
   upspeedShoot: {fileID: 800461354}

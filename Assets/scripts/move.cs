@@ -32,8 +32,10 @@ public class move : MonoBehaviour
     {
         if (other.gameObject.CompareTag("trap"))
         {
+            MAgazine.inmagazine = true;
             restarting = true;
             canMove = false;
+            _magazine.Inmagaz();
         }
     }
 
@@ -169,9 +171,10 @@ public class move : MonoBehaviour
         gameObject.transform.position = startpos;
         Rb.linearVelocity = Vector3.zero;
         canMove = false;
-        shoot.canshot = false;
         MAgazine.inmagazine = true;
+        shoot.canshot = false;
         _magazine.Inmagaz();
+        boss.maxhpboss = 100;
     
         yield return new WaitForSeconds(1f);
     

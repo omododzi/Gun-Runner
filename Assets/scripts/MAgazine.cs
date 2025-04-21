@@ -40,7 +40,10 @@ public class MAgazine : MonoBehaviour
     {
         if (inmagazine)
         {
-            Debug.Log("Inmagazine");
+            start.SetActive(true);
+            baff1.SetActive(true);
+            baff2.SetActive(true);
+            baff3.SetActive(true);
         }
         if (inmagazine && score.summ >= spawn.summbaff && spawn.ourgan <= 4)
         {

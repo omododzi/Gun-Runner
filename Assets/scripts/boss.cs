@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class boss : MonoBehaviour
 { public static int maxhpboss;
-  private int hp = maxhpboss += 10;
+  private int hp =1;
   private int maney;
   private bool getmoney = false;
   private Animator animator;
   public  int speed =10;
-  private Rigidbody RB;
   private bool fight = false;
   private Transform player;
   public AudioClip[] soundes;
@@ -23,7 +22,6 @@ public class boss : MonoBehaviour
       wall.wallmaxhp += 10;
       maney = hp;
       animator = GetComponent<Animator>();
-      RB = GetComponent<Rigidbody>();
       animator.SetBool("issleep", true);
   }
 
@@ -71,6 +69,7 @@ public class boss : MonoBehaviour
       }
       if (fight && hp > 0)
       {
+          Debug.Log(hp);
           Vector3 direction = (player.position - transform.position).normalized;
 
 
@@ -92,12 +91,12 @@ public class boss : MonoBehaviour
           }
           animator.SetTrigger("die");
           spawn.spawnedfloor--;
-          Destroy(gameObject,0.5f);
           score.summ += maney;
           maxhpboss += 200;
-          hp = 1000;
+          fight = false;
           move.infight = false;
           move.canMove = true;
+          Destroy(gameObject,0.1f);
           
       }
   }
